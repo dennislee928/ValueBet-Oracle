@@ -1,0 +1,26 @@
+<div class="dashboard">
+  <h1>ValueBet Oracle</h1>
+  <p class="subtitle">價值投注儀表板 · 每 60 秒更新</p>
+
+  <ng-container *ngIf="valueBets$ | async as list; else loading">
+    <div class="cards" *ngIf="list.length; else empty">
+      <vb-match-card
+        *ngFor="let match of list"
+        [match]="match"
+        [highlight]="match.value_edge > 0.05"
+        (select)="onSelectMatch(match)"
+      ></vb-match-card>
+    </div>
+    <ng-template #empty>
+      <mat-card class="empty">尚無價值投注資料，請確認 Rust Gateway 與 ML 服務已啟動。</mat-card>
+    </ng-template>
+    <vb-kelly-calculator
+      *ngIf="selectedMatch"
+      [match]="selectedMatch"
+      (closed)="selectedMatch = null"
+    ></vb-kelly-calculator>
+  </ng-container>
+  <ng-template #loading>
+    <mat-spinner></mat-spinner>
+  </ng-template>
+</div>

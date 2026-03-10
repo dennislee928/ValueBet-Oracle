@@ -1,0 +1,24 @@
+<mat-card [class.high-value]="highlight" (click)="onClick()" class="match-card">
+  <mat-card-header>
+    <mat-card-title>{{ match.home_team }} vs {{ match.away_team }}</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="row">
+      <span>小數賠率</span>
+      <strong>{{ match.decimal_odds | number:'1.2-2' }}</strong>
+    </div>
+    <div class="row">
+      <span>隱含機率</span>
+      <strong>{{ match.implied_prob | percent:'1.1-1' }}</strong>
+    </div>
+    <div class="row">
+      <span>AI 預測勝率</span>
+      <strong>{{ match.ai_home_win_prob | percent:'1.1-1' }}</strong>
+    </div>
+    <div class="row edge" [class.positive]="match.value_edge > 0">
+      <span>價值期望 (Edge)</span>
+      <strong>{{ match.value_edge | percent:'1.1-1' }}</strong>
+    </div>
+    <p *ngIf="highlight" class="badge">推薦價值投注</p>
+  </mat-card-content>
+</mat-card>

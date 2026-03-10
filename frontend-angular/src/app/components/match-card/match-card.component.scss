@@ -1,0 +1,19 @@
+.match-card {
+  cursor: pointer;
+  transition: box-shadow 0.2s;
+  &.high-value {
+    background: rgba(76, 175, 80, 0.12);
+    border-left: 4px solid #4caf50;
+  }
+  .row {
+    display: flex;
+    justify-content: space-between;
+    margin: 0.25rem 0;
+    &.edge.positive { color: #2e7d32; }
+  }
+  .badge {
+    margin: 0.5rem 0 0 0;
+    color: #2e7d32;
+    font-weight: 500;
+  }
+}
