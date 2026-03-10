@@ -1,0 +1,47 @@
+# Dependencies
+node_modules/
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+venv/
+.venv/
+env/
+.env
+.env.local
+.env.*.local
+
+# Build / target
+target/
+dist/
+build/
+*.egg-info/
+.eggs/
+*.egg
+
+# IDE / OS
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# Large data (CSV, models - optional: track small samples)
+*.csv
+!ml-python-engine/data/sample*.csv
+models/*.joblib
+!ml-python-engine/models/.gitkeep
+
+# Logs / coverage
+*.log
+.coverage
+htmlcov/
+.pytest_cache/
+
+# Angular
+.angular/
+*.tsbuildinfo
+
+# Rust
+Cargo.lock

@@ -1,0 +1,8 @@
+# ValueBet Oracle - 微服務編排 (預留)
+# Phase 10 將補齊 frontend, gateway, ml-engine 等服務定義
+
+services: {}
+
+networks:
+  default:
+    name: valuebet-oracle-net
