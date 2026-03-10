@@ -45,3 +45,4 @@ htmlcov/
 
 # Rust
 Cargo.lock
+/.cursor
