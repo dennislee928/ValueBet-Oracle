@@ -1,8 +1,48 @@
-# ValueBet Oracle - 微服務編排 (預留)
-# Phase 10 將補齊 frontend, gateway, ml-engine 等服務定義
+# ValueBet Oracle - 微服務編排
+# 啟動: docker-compose up --build -d
+# 前端: http://localhost (Nginx), Gateway: http://localhost:3000
+# ML Engine 僅內網，不對外暴露 Port
 
-services: {}
+services:
+  frontend:
+    build:
+      context: ./frontend-angular
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    networks:
+      - valuebet-net
+    depends_on:
+      - gateway
+
+  gateway:
+    build:
+      context: ./backend-rust-gateway
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      ML_ENGINE_URL: http://ml-engine:8000
+      ODDS_API_KEY: ${ODDS_API_KEY:-}
+    networks:
+      valuebet-net:
+        aliases:
+          - gateway
+    depends_on:
+      - ml-engine
+
+  ml-engine:
+    build:
+      context: ./ml-python-engine
+      dockerfile: Dockerfile
+    # 不對外 ports，僅 Gateway 透過網路存取
+    expose:
+      - "8000"
+    environment:
+      - PYTHONUNBUFFERED=1
+    networks:
+      - valuebet-net
 
 networks:
-  default:
+  valuebet-net:
     name: valuebet-oracle-net
